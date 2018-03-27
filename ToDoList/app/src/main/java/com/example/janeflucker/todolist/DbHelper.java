@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -33,15 +34,11 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("taskName", taskName );
         contentValues.put("taskDescription", taskDescription);
-//        contentValues.put("completed", completed);
+        contentValues.put("completed", 0);
         db.insert("tasks", null, contentValues);
         db.close();
         return true;
     }
-
-//    public boolean editTask() {
-//
-//    }
 
     public ArrayList<Task> allTasks() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -72,4 +69,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
     }
+
+    public Boolean update(int id, String taskName, String taskDescription, int completed) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("taskName", taskName );
+        contentValues.put("taskDescription", taskDescription);
+        contentValues.put("completed", completed);
+        return db.update("tasks", contentValues, "id = ?", new String[]{String.valueOf(id)})>0;
+    }
+
 }

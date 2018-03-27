@@ -1,29 +1,18 @@
 package com.example.janeflucker.todolist;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskActivity extends BaseActivity {
 
+//    int id;
     EditText taskName, taskDescription;
-
-//    completed;
+    CheckBox completed;
 
     DbHelper db;
 
@@ -32,8 +21,9 @@ public class TaskActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-         taskName = findViewById(R.id.taskName);
+         taskName = findViewById(R.id.taskNameEdit);
          taskDescription = findViewById(R.id.taskDescription);
+//         completed = findViewById(R.id.completed);
          db = new DbHelper(this);
 
         //
@@ -59,13 +49,15 @@ public class TaskActivity extends BaseActivity {
         boolean taskAdded = db.addTask(
                 taskName.getText().toString(),
                 taskDescription.getText().toString()
-//                completed.getText().toString()
         );
         if (taskAdded == true)
             Toast.makeText(TaskActivity.this, "Task added", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(TaskActivity.this, "Task not added", Toast.LENGTH_SHORT).show();
+        setContentView(R.layout.activity_task);
+
     }
+
 
 
 //    @Override
@@ -77,16 +69,6 @@ public class TaskActivity extends BaseActivity {
 //    }
 
 
-
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.activity_task, menu);
-//
-//        return true;
-//    }
-//        taskDescription.setText(selectedTask.getTaskDescription());
 
 
 //

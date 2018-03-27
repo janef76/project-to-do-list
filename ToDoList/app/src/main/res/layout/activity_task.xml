@@ -7,7 +7,7 @@
     tools:context="com.example.janeflucker.todolist.TaskActivity">
 
     <EditText
-        android:id="@+id/taskName"
+        android:id="@+id/taskNameEdit"
         android:layout_width="147dp"
         android:layout_height="38dp"
         android:layout_marginEnd="8dp"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskName"
+        app:layout_constraintTop_toBottomOf="@+id/taskNameEdit"
         tools:text="TaskDescription" />
 
     <Button
@@ -42,4 +42,5 @@
         android:text="Add New"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
+
 </android.support.constraint.ConstraintLayout>

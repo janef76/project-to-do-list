@@ -1,13 +1,11 @@
 package com.example.janeflucker.todolist;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,10 +30,15 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.task_item, parent,false);
         }
 
-        TextView task = listItemView.findViewById(R.id.taskName);
+        final TextView task = listItemView.findViewById(R.id.taskNameEdit);
         task.setText(currentTask.getTaskName());
 
+        CheckBox checkBox = listItemView.findViewById(R.id.checkBoxCompleted);
+        boolean isChecked = currentTask.getCompleted() == 1;
 
+        checkBox.setChecked( isChecked );
+
+        checkBox.setTag(currentTask);
         listItemView.setTag(currentTask);
 
         return listItemView;

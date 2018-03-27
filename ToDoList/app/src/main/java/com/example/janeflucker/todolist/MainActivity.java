@@ -33,10 +33,11 @@ public class MainActivity extends BaseActivity {
 
         dbHelper = new DbHelper(this);
 //        dbHelper.addTask("Shopping", "list of shopping", false);
-//        dbHelper.addTask("Golf", "play golf at west linton", false);
+//        dbHelper.addTask("Golf", "play golf at west linton", true);
 
         //dbHelper.getAlltasks();
-//        Task task = new Task(1, "Shopping", "Shop", 0);
+//        Task task = new Task(1, "Shopping", "Shop", 1);
+
 
 
 
@@ -65,6 +66,26 @@ public class MainActivity extends BaseActivity {
         intent.putExtra("task", selectedTask);
 
         startActivity(intent);
+    }
+
+    public void onCheckboxTick(View checkBox) {
+        Task selectedTask = (Task) checkBox.getTag();
+
+        if(selectedTask.completed == 1) {
+            selectedTask.completed = 0;
+        } else {
+            selectedTask.completed = 1;
+        }
+
+//        dbHelper.update(selectedTask);
+
+
+//        CheckBox checkBox;
+//        if (checkBox.get(position).isSelected)) {
+//    checkBox.selectedText(true);
+//        } else {
+//    checkBox.selectedText(false);
+//        }
     }
 
 }
