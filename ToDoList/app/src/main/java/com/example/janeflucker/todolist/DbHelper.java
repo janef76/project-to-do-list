@@ -27,17 +27,21 @@ public class DbHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(sqlTasks);
     }
-
-    public boolean addTask(String taskName, String taskDescription, Boolean completed) {
+//    Boolean completed
+    public boolean addTask(String taskName, String taskDescription) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("taskName", taskName );
         contentValues.put("taskDescription", taskDescription);
-        contentValues.put("completed", completed);
+//        contentValues.put("completed", completed);
         db.insert("tasks", null, contentValues);
         db.close();
         return true;
     }
+
+//    public boolean editTask() {
+//
+//    }
 
     public ArrayList<Task> allTasks() {
         SQLiteDatabase db = this.getReadableDatabase();

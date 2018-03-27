@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 
-public class DescriptionActivity extends AppCompatActivity {
+public class DescriptionActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,4 @@ public class DescriptionActivity extends AppCompatActivity {
         taskDescription.setText(selectedTask.getTaskDescription());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.activity_main, menu);
-
-        return true;
-    }
 }

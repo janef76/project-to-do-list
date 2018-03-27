@@ -1,5 +1,6 @@
 package com.example.janeflucker.todolist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,34 +11,40 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskActivity extends AppCompatActivity {
-//
-//    List<Task> taskList;
-    SQLiteDatabase toDoList;
-//    ListView listViewTasks;
-//    TaskAdapter adapter;
+public class TaskActivity extends BaseActivity {
 
+    EditText taskName, taskDescription;
+
+//    completed;
+
+    DbHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.task_item);
+        setContentView(R.layout.activity_task);
 
-        TextView taskName = findViewById(R.id.taskName);
-        TextView taskDescription = findViewById(R.id.taskDescription);
+         taskName = findViewById(R.id.taskName);
+         taskDescription = findViewById(R.id.taskDescription);
+         db = new DbHelper(this);
 
-        Intent intent = getIntent();
-        Task selectedTask = (Task) intent.getSerializableExtra("task");
+        //
+//        Log.d("taskActivity", selectedTask.getTaskName());
+//        Log.d("taskActivity", selectedTask.getTaskDescription());
+//
+//        taskName.setText(selectedTask.getTaskName());
+//        taskDescription.setText(selectedTask.getTaskDescription());
 
-        Log.d("taskActivity", selectedTask.getTaskName());
+//        editTaskName = (EditText)findViewById(R.id.taskName);
 
-        taskName.setText(selectedTask.getTaskName());
     }
 
     @Override
@@ -47,6 +54,29 @@ public class TaskActivity extends AppCompatActivity {
 
         return true;
     }
+
+    public void onAddButtonClick(View clickView) {
+        boolean taskAdded = db.addTask(
+                taskName.getText().toString(),
+                taskDescription.getText().toString()
+//                completed.getText().toString()
+        );
+        if (taskAdded == true)
+            Toast.makeText(TaskActivity.this, "Task added", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(TaskActivity.this, "Task not added", Toast.LENGTH_SHORT).show();
+    }
+
+
+//    @Override
+//    public void onAddButtonClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.addTask:
+//                dbHelper.addTask("", "", false);
+//        }
+//    }
+
+
 
 //
 //    @Override

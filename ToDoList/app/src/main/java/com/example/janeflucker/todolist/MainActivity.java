@@ -1,20 +1,28 @@
 package com.example.janeflucker.todolist;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
+
+    SQLiteDatabase mDatabase;
 
     DbHelper dbHelper;
 
@@ -30,15 +38,22 @@ public class MainActivity extends AppCompatActivity {
         //dbHelper.getAlltasks();
 //        Task task = new Task(1, "Shopping", "Shop", 0);
 
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         ArrayList<Task> allTasks = dbHelper.allTasks(); //new ArrayList<>();
 //        allTasks.add(task);
 
-//        Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show();
 
         ListView listView = findViewById(R.id.listTasks);
         TaskAdapter taskAdapter = new TaskAdapter(this, allTasks);
         listView.setAdapter(taskAdapter);
-
     }
 
     public void onListItemClick(View listItem) {
@@ -52,30 +67,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.activity_main, menu);
-
-        return true;
-    }
-
-//    private void addTask() {
-//        String name = addTask().getText().toString().trim();
-//        String description = addDescription().getText().toString().trim();
-//
-//
-//        if (inputsAreCorrect(name, salary)) {
-//
-//            String insertSQL = "INSERT INTO tasks \n" +
-//                    "(name, description)\n" +
-//                    "VALUES \n" +
-//                    "(?, ?);";
-//
-//            .execSQL(insertSQL, new String[]{name, description});
-//
-//            Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }
 

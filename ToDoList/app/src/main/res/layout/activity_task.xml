@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.janeflucker.todolist.TaskActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/taskName"
         android:layout_width="147dp"
         android:layout_height="38dp"
@@ -19,14 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TaskName" />
 
-    <TextView
+    <EditText
         android:id="@+id/taskDescription"
         android:layout_width="214dp"
         android:layout_height="107dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +33,13 @@
         tools:text="TaskDescription" />
 
     <Button
-        android:id="@+id/editButton"
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="56dp"
-        android:text="Edit"
+        android:onClick="onAddButtonClick"
+        android:text="Add New"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
 </android.support.constraint.ConstraintLayout>
