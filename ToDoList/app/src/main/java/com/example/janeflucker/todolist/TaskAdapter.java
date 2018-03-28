@@ -43,17 +43,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         return listItemView;
 
-//        LayoutInflater inflater = LayoutInflater.from(context);
-//        View view = inflater.inflate(listLayoutRes, null);
-//
-//        TextView taskName = view.findViewById(R.id.taskName);
-//        TextView taskDescription = view.findViewById(R.id.taskDescription);
-//
-//
-//        return view;
-
     }
 }
 
-//        TextView description = listItemView.findViewById(R.id.description);
-//        description.setText(currentTask.getTaskDescription());

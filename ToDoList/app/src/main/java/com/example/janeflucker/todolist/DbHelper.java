@@ -101,7 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void delete(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String selection = TaskContract.FeedEntry._ID + " id = ?";
+        String selection = TaskContract.FeedEntry._ID + " = ?";
         String[] selectionArgs = {String.valueOf(task.getId())};
         db.delete(TaskContract.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }

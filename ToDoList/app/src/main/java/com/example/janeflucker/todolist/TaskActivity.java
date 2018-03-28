@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 public class TaskActivity extends BaseActivity {
 
-//    int id;
     EditText taskName, taskDescription;
     CheckBox completed;
 
@@ -26,15 +25,6 @@ public class TaskActivity extends BaseActivity {
          completed = findViewById(R.id.completed);
 
          db = new DbHelper(this);
-
-        //
-//        Log.d("taskActivity", selectedTask.getTaskName());
-//        Log.d("taskActivity", selectedTask.getTaskDescription());
-//
-//        taskName.setText(selectedTask.getTaskName());
-//        taskDescription.setText(selectedTask.getTaskDescription());
-
-//        editTaskName = (EditText)findViewById(R.id.taskName);
 
     }
 

@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DbHelper(this);
+
 //        dbHelper.addTask("Shopping", "list of shopping", false);
 //        dbHelper.addTask("Golf", "play golf at west linton", true);
 
@@ -74,7 +75,7 @@ public class MainActivity extends BaseActivity {
             selectedTask.completed = 1;
         }
 
-//        dbHelper.update(selectedTask);
+        dbHelper.update(selectedTask);
     }
 
 }

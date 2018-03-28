@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class DescriptionActivity extends BaseActivity {
 
-    int id;
     EditText taskName, taskDescription;
     CheckBox chkBox;
     Task selectedTask;
@@ -59,8 +58,34 @@ public class DescriptionActivity extends BaseActivity {
             Toast.makeText(this, "Task edited", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Task not edited", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
+    public void onDeleteButtonClick(View clickView) {
+        int checked = 0;
 
+        if(chkBox.isChecked()) {
+            checked = 1;
+        }
+
+        Task task = new Task(
+                selectedTask.getId(),
+                taskName.getText().toString(),
+                taskDescription.getText().toString(),
+                checked
+        );
+
+        db.delete(task);
+
+        setContentView(R.layout.activity_description);
+
+        Toast.makeText(this, "Task deleted", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
 
 }
