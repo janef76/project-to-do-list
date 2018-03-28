@@ -9,74 +9,101 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static com.example.janeflucker.todolist.TaskContract.FeedEntry.COL_COMPLETED;
+import static com.example.janeflucker.todolist.TaskContract.FeedEntry.COL_DESCRIPTION;
+import static com.example.janeflucker.todolist.TaskContract.FeedEntry.COL_NAME;
+import static com.example.janeflucker.todolist.TaskContract.FeedEntry.TABLE_NAME;
+
 /**
  * Created by janeflucker on 26/03/2018.
  */
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "toDoList";
+    private static final String DB_NAME = "toDoList.db";
     private static final int DB_VERSION = 1;
 
     public DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sqlTasks = "CREATE TABLE tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, taskName TEXT, taskDescription TEXT, completed BOOLEAN);";
-
-        sqLiteDatabase.execSQL(sqlTasks);
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TaskContract.SQL_CREATE_ENTRIES);
     }
-//    Boolean completed
-    public boolean addTask(String taskName, String taskDescription) {
+
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(TaskContract.SQL_DELETE_ENTRIES);
+        onCreate(db);
+    }
+
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public boolean addTask(Task task) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName", taskName );
-        contentValues.put("taskDescription", taskDescription);
-        contentValues.put("completed", 0);
-        db.insert("tasks", null, contentValues);
+        contentValues.put(COL_NAME, task.getTaskName() );
+        contentValues.put(COL_DESCRIPTION, task.getTaskDescription());
+        contentValues.put(COL_COMPLETED, task.getCompleted());
+        long result = db.insert(TABLE_NAME, null, contentValues);
         db.close();
-        return true;
+        if(result == -1)
+            return false;
+        else
+            return true;
     }
 
     public ArrayList<Task> allTasks() {
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Task> taskList = new ArrayList<>();
 
-        Cursor cursorTasks = db.rawQuery("SELECT * FROM tasks", null);
+        Cursor cursorTasks = db.rawQuery("SELECT * FROM " + TaskContract.FeedEntry.TABLE_NAME, null);
+
+        ArrayList<Task> taskList = new ArrayList<>();
 
         if (cursorTasks.moveToFirst()) {
             do {
-                taskList.add(new Task(
-                        cursorTasks.getInt(0),
-                        cursorTasks.getString(1),
-                        cursorTasks.getString(2),
-                        cursorTasks.getInt(3)
-                ));
+
+                Integer idIndex = cursorTasks.getColumnIndex(TaskContract.FeedEntry._ID);
+                Integer id = cursorTasks.getInt(idIndex);
+
+                Integer nameIndex = cursorTasks.getColumnIndex(TaskContract.FeedEntry.COL_NAME);
+                String name = cursorTasks.getString(nameIndex);
+
+                Integer descriptionIndex = cursorTasks.getColumnIndex(TaskContract.FeedEntry.COL_DESCRIPTION);
+                String description = cursorTasks.getString(descriptionIndex);
+
+                Integer completedIndex = cursorTasks.getColumnIndex(TaskContract.FeedEntry.COL_COMPLETED);
+                Integer completed = cursorTasks.getInt(completedIndex);
+
+            Task task = new Task(id, name, description, completed);
+
+            taskList.add(task);
+
             } while (cursorTasks.moveToNext());
         }
         cursorTasks.close();
 
         return taskList;
+
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String sqlTasks = "DROP TABLE IF EXISTS tasks";
-
-        sqLiteDatabase.execSQL(sqlTasks);
-
-        onCreate(sqLiteDatabase);
-    }
-
-    public Boolean update(int id, String taskName, String taskDescription, int completed) {
-        SQLiteDatabase db = getWritableDatabase();
+    public Boolean update(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName", taskName );
-        contentValues.put("taskDescription", taskDescription);
-        contentValues.put("completed", completed);
-        return db.update("tasks", contentValues, "id = ?", new String[]{String.valueOf(id)})>0;
+
+        contentValues.put(COL_NAME, task.getTaskName() );
+        contentValues.put(COL_DESCRIPTION, task.getTaskDescription());
+        contentValues.put(COL_COMPLETED, task.getCompleted());
+        return db.update(TABLE_NAME, contentValues, "_id = ?", new String[]{String.valueOf(task.getId())})>0;
+    }
+
+    public void delete(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = TaskContract.FeedEntry._ID + " id = ?";
+        String[] selectionArgs = {String.valueOf(task.getId())};
+        db.delete(TaskContract.FeedEntry.TABLE_NAME, selection, selectionArgs);
     }
 
 }

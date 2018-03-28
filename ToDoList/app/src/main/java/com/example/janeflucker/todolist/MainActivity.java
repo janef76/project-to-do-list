@@ -38,9 +38,6 @@ public class MainActivity extends BaseActivity {
         //dbHelper.getAlltasks();
 //        Task task = new Task(1, "Shopping", "Shop", 1);
 
-
-
-
     }
 
     @Override
@@ -78,14 +75,6 @@ public class MainActivity extends BaseActivity {
         }
 
 //        dbHelper.update(selectedTask);
-
-
-//        CheckBox checkBox;
-//        if (checkBox.get(position).isSelected)) {
-//    checkBox.selectedText(true);
-//        } else {
-//    checkBox.selectedText(false);
-//        }
     }
 
 }

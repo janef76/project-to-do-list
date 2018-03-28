@@ -13,7 +13,7 @@ public class DescriptionActivity extends BaseActivity {
 
     int id;
     EditText taskName, taskDescription;
-    CheckBox completed;
+    CheckBox chkBox;
     Task selectedTask;
     DbHelper db;
 
@@ -26,7 +26,7 @@ public class DescriptionActivity extends BaseActivity {
 
         taskName = findViewById(R.id.taskNameEdit);
         taskDescription = findViewById(R.id.taskDescription);
-        CheckBox chkBox = (CheckBox)findViewById(R.id.completed);
+        chkBox = findViewById(R.id.completed);
 
         Intent intent = getIntent();
         selectedTask = (Task) intent.getSerializableExtra("task");
@@ -35,16 +35,26 @@ public class DescriptionActivity extends BaseActivity {
 
         taskName.setText(selectedTask.getTaskName());
         taskDescription.setText(selectedTask.getTaskDescription());
-//        chkBox.setText(selectedTask.getCompleted());
+        chkBox.setChecked(selectedTask.getCompleted() == 1 );
     }
 
     public void onEditButtonClick(View clickView) {
-        boolean taskEdited = db.update(
+
+        int checked = 0;
+
+        if(chkBox.isChecked()) {
+            checked = 1;
+        }
+
+        Task task = new Task(
                 selectedTask.getId(),
                 taskName.getText().toString(),
                 taskDescription.getText().toString(),
-                selectedTask.getCompleted()
+                checked
         );
+
+        boolean taskEdited = db.update(task);
+
         if (taskEdited == true)
             Toast.makeText(this, "Task edited", Toast.LENGTH_SHORT).show();
         else

@@ -23,7 +23,8 @@ public class TaskActivity extends BaseActivity {
 
          taskName = findViewById(R.id.taskNameEdit);
          taskDescription = findViewById(R.id.taskDescription);
-//         completed = findViewById(R.id.completed);
+         completed = findViewById(R.id.completed);
+
          db = new DbHelper(this);
 
         //
@@ -46,10 +47,14 @@ public class TaskActivity extends BaseActivity {
     }
 
     public void onAddButtonClick(View clickView) {
-        boolean taskAdded = db.addTask(
+
+        Task task = new Task(
                 taskName.getText().toString(),
                 taskDescription.getText().toString()
         );
+
+        boolean taskAdded = db.addTask(task);
+
         if (taskAdded == true)
             Toast.makeText(TaskActivity.this, "Task added", Toast.LENGTH_SHORT).show();
         else
@@ -57,19 +62,6 @@ public class TaskActivity extends BaseActivity {
         setContentView(R.layout.activity_task);
 
     }
-
-
-
-//    @Override
-//    public void onAddButtonClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.addTask:
-//                dbHelper.addTask("", "", false);
-//        }
-//    }
-
-
-
 
 //
 //        listViewTasks = (ListView) findViewById(R.id.listTasks);
