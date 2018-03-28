@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -32,13 +33,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DbHelper(this);
-
-//        dbHelper.addTask("Shopping", "list of shopping", false);
-//        dbHelper.addTask("Golf", "play golf at west linton", true);
-
-        //dbHelper.getAlltasks();
-//        Task task = new Task(1, "Shopping", "Shop", 1);
-
     }
 
     @Override

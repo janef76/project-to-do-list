@@ -1,5 +1,6 @@
 package com.example.janeflucker.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +13,7 @@ public class TaskActivity extends BaseActivity {
 
     EditText taskName, taskDescription;
     CheckBox completed;
+    String name;
 
     DbHelper db;
 
@@ -38,37 +40,24 @@ public class TaskActivity extends BaseActivity {
 
     public void onAddButtonClick(View clickView) {
 
+        name = taskName.getText().toString();
+
         Task task = new Task(
-                taskName.getText().toString(),
+                name,
                 taskDescription.getText().toString()
         );
 
-        boolean taskAdded = db.addTask(task);
-
-        if (taskAdded == true)
-            Toast.makeText(TaskActivity.this, "Task added", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(TaskActivity.this, "Task not added", Toast.LENGTH_SHORT).show();
-        setContentView(R.layout.activity_task);
+        if (name.length() == 0) {
+            Toast.makeText(TaskActivity.this, "Task name can't be empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            db.addTask(task);
+            setContentView(R.layout.activity_task);
+            taskName = findViewById(R.id.taskNameEdit);
+        }
 
     }
 
-//
-//        listViewTasks = (ListView) findViewById(R.id.listTasks);
-//        taskList = new ArrayList<>();
-//
-//        toDoList = openOrCreateDatabase("toDoList", MODE_PRIVATE, null);
-//
-//        showAllTasksFromDatabase();
-
-
-//    public void getView(int position, View listViewItem, ViewGroup parent) {
-
-//        Task currentTask = getItem(position);
-
-
-//        adapter = new TaskAdapter(this, R.layout.activity_main, taskList, toDoList);
-//
-//        listViewTasks.setAdapter(adapter);
-//    }
 }
+
+

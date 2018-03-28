@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ToDoList</string>
     <string name="add">add</string>
+    <string name="home">Home Page</string>
+    <string name="Add">Add</string>
+    <string name="AddTask">Add Task</string>
 </resources>

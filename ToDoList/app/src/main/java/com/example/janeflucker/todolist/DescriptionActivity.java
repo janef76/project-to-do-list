@@ -15,6 +15,7 @@ public class DescriptionActivity extends BaseActivity {
     CheckBox chkBox;
     Task selectedTask;
     DbHelper db;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +46,23 @@ public class DescriptionActivity extends BaseActivity {
             checked = 1;
         }
 
+        name = taskName.getText().toString();
+
         Task task = new Task(
                 selectedTask.getId(),
-                taskName.getText().toString(),
+                name,
                 taskDescription.getText().toString(),
                 checked
         );
 
-        boolean taskEdited = db.update(task);
-
-        if (taskEdited == true)
+        if (name.length() == 0) {
+            Toast.makeText(this, "Task name cannot be empty", Toast.LENGTH_SHORT).show();
+        } else {
+            db.update(task);
             Toast.makeText(this, "Task edited", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "Task not edited", Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onDeleteButtonClick(View clickView) {
@@ -85,7 +87,6 @@ public class DescriptionActivity extends BaseActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
 }
