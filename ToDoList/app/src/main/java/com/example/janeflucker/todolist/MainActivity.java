@@ -23,21 +23,21 @@ import java.util.Calendar;
 
 public class MainActivity extends BaseActivity {
 
-    DbHelper dbHelper;
+    DbHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new DbHelper(this);
+        db = new DbHelper(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        ArrayList<Task> allTasks = dbHelper.allTasks();
+        ArrayList<Task> allTasks = db.allTasks();
 
         ListView listView = findViewById(R.id.listTasks);
         TaskAdapter taskAdapter = new TaskAdapter(this, allTasks);
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
             selectedTask.completed = 1;
         }
 
-        dbHelper.update(selectedTask);
+        db.update(selectedTask);
     }
 
 }

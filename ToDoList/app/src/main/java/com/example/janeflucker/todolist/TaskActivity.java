@@ -14,7 +14,6 @@ public class TaskActivity extends BaseActivity {
     EditText taskName, taskDescription;
     CheckBox completed;
     String name;
-
     DbHelper db;
 
     @Override
@@ -27,7 +26,6 @@ public class TaskActivity extends BaseActivity {
          completed = findViewById(R.id.completed);
 
          db = new DbHelper(this);
-
     }
 
     @Override
@@ -55,7 +53,6 @@ public class TaskActivity extends BaseActivity {
             setContentView(R.layout.activity_task);
             taskName = findViewById(R.id.taskNameEdit);
         }
-
     }
 
 }

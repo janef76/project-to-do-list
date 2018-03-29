@@ -16,8 +16,6 @@ import java.util.List;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
 
-
-
     public TaskAdapter(Context context, List<Task> taskList) {
         super(context, 0, taskList);
     }
