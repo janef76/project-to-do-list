@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         ArrayList<Task> allTasks = dbHelper.allTasks(); //new ArrayList<>();
 //        allTasks.add(task);
 
-        Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show();
 
         ListView listView = findViewById(R.id.listTasks);
         TaskAdapter taskAdapter = new TaskAdapter(this, allTasks);
@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
     public void onListItemClick(View listItem) {
         Task selectedTask = (Task) listItem.getTag();
 
-        Log.d("MainActivity", selectedTask.getTaskName());
+//        Log.d("MainActivity", selectedTask.getTaskName());
 
         Intent intent = new Intent(this, DescriptionActivity.class);
         intent.putExtra("task", selectedTask);

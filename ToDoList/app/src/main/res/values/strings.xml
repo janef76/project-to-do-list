@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">ToDoList</string>
-    <string name="add">add</string>
+    <string name="app_name">To Do List</string>
     <string name="home">Home Page</string>
     <string name="Add">Add</string>
-    <string name="AddTask">Add Task</string>
+    <string name="AddTask">ADD TASK</string>
+    <string name="taskDes">TASK DESCRIPTION</string>
+    <string name="taskName">TASK NAME</string>
+    <string name="updateTask">UPDATE</string>
+    <string name="delete">DELETE</string>
+    <string name="addButton">ADD</string>
 </resources>

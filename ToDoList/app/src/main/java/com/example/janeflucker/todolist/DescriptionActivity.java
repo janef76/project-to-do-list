@@ -31,7 +31,7 @@ public class DescriptionActivity extends BaseActivity {
         Intent intent = getIntent();
         selectedTask = (Task) intent.getSerializableExtra("task");
 
-        Log.d("taskActivity", selectedTask.getTaskName());
+//        Log.d("taskActivity", selectedTask.getTaskName());
 
         taskName.setText(selectedTask.getTaskName());
         taskDescription.setText(selectedTask.getTaskDescription());
@@ -55,11 +55,11 @@ public class DescriptionActivity extends BaseActivity {
                 checked
         );
 
-        if (name.length() == 0) {
-            Toast.makeText(this, "Task name cannot be empty", Toast.LENGTH_SHORT).show();
+        if (name.isEmpty() || name.trim().isEmpty()) {
+            Toast.makeText(this, "Task name cannot be blank", Toast.LENGTH_SHORT).show();
         } else {
             db.update(task);
-            Toast.makeText(this, "Task edited", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -83,7 +83,7 @@ public class DescriptionActivity extends BaseActivity {
 
         setContentView(R.layout.activity_description);
 
-        Toast.makeText(this, "Task deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Task is deleted", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

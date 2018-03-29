@@ -47,8 +47,8 @@ public class TaskActivity extends BaseActivity {
                 taskDescription.getText().toString()
         );
 
-        if (name.length() == 0) {
-            Toast.makeText(TaskActivity.this, "Task name can't be empty", Toast.LENGTH_SHORT).show();
+        if (name.isEmpty() || name.trim().isEmpty()) {
+            Toast.makeText(TaskActivity.this, "Task name can't be blank", Toast.LENGTH_SHORT).show();
         }
         else {
             db.addTask(task);
