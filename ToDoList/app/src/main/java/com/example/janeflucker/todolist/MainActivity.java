@@ -23,8 +23,6 @@ import java.util.Calendar;
 
 public class MainActivity extends BaseActivity {
 
-    SQLiteDatabase mDatabase;
-
     DbHelper dbHelper;
 
     @Override
@@ -39,10 +37,7 @@ public class MainActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
 
-        ArrayList<Task> allTasks = dbHelper.allTasks(); //new ArrayList<>();
-//        allTasks.add(task);
-
-//        Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show();
+        ArrayList<Task> allTasks = dbHelper.allTasks();
 
         ListView listView = findViewById(R.id.listTasks);
         TaskAdapter taskAdapter = new TaskAdapter(this, allTasks);
@@ -51,8 +46,6 @@ public class MainActivity extends BaseActivity {
 
     public void onListItemClick(View listItem) {
         Task selectedTask = (Task) listItem.getTag();
-
-//        Log.d("MainActivity", selectedTask.getTaskName());
 
         Intent intent = new Intent(this, DescriptionActivity.class);
         intent.putExtra("task", selectedTask);
